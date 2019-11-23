@@ -1,0 +1,37 @@
+@import "../constant/typographys";
+
+
+* {
+    font-family: $font__logo;
+}
+
+.principal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.display {
+    &__background {
+        background-size: 100% 100vh;
+        background-repeat: no-repeat;
+    }
+}
+
+.logo {
+    font-family: $font__logo;
+    color: white;
+    font-size: 3em;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    min-width: 100px;
+    min-height: 100px;
+}
+
