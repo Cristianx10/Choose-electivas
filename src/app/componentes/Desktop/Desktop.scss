@@ -3,50 +3,90 @@
 
 .Desktop {
 
-    &__container{
+    &__container {
 
         @extend %max-width;
         display: flex;
 
-        &__user,&__recomend{
-         
-            h1{
+        &__user,
+        &__recomend {
+
+            h1 {
                 font-size: $size-h1;
-               
+
             }
         }
-        &__user{
+
+        &__user {
             width: 30%;
 
-            &__title{
-               
+            &__title {
 
-                .profile{
+
+                .profile {
                     text-align: center;
-                    &__title{
-                        
-                        h1{
+
+                    &__title {
+
+                        h1 {
                             margin: 10px 0;
                         }
                     }
                 }
             }
 
-            &__information{
+            &__information {
                 display: flex;
+                justify-content: space-around;
                 flex-wrap: wrap;
 
-                .CellValue{
+                .CellValue {
                     margin: 5px;
                 }
 
             }
         }
 
-        &__recomend{
+        &__recomend {
             width: 70%;
 
-            &__list{
+            &__navegation {
+
+          
+                ul {
+                    display: flex;
+
+                    li {
+                        width: 100px;
+                        height: 40px;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-right: 1px solid black;
+
+                        a {
+                            width: 90%;
+                            height: 90%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background: red;
+                            border-radius: 10px;
+
+                        }
+
+                        &:last-of-type{
+                            border-right: none;
+                        }
+                      
+                    }
+                }
+
+                width: 100%;
+            }
+
+            &__list {
                 display: flex;
                 flex-wrap: wrap;
             }
@@ -54,7 +94,7 @@
     }
 }
 
-.CellValue{
+.CellValue {
     display: flex;
     flex-direction: column;
 }

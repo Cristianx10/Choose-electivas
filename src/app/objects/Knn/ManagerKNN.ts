@@ -189,6 +189,81 @@ class ManagerKNN {
         return { result: result, resultKnn: resultOfKNN };
     }
 
+    calculateUsers(refs: KnnObject[] | KnnUser[], filter: number, exclude?: KnnObject[] | KnnUser[]) {
+
+        var resultOfKNN: VotoKnn[] = [];
+
+        let factor = 0;
+        while (resultOfKNN.length < filter && factor + 1 < this.data.length) {
+            factor++;
+
+            let userRefs: KnnUser[][] = [];
+
+            refs.forEach((ref) => {
+                let result = this.calculate(ref, factor);
+                userRefs.push(result);
+            });
+
+            let namesSame: VotoKnn[] = [];
+
+            userRefs.forEach((userArray) => {
+
+                userArray.forEach((user) => {
+                    let find = false;
+    
+                    namesSame.forEach((name) => {
+                    
+                        if (name.name === user.nombre) {
+                            name.value++;
+                            find = true;
+                        }
+                    });
+
+                    if (!find) {
+                        namesSame.push({
+                            name: user.nombre,
+                            object: user,
+                            value: 1,
+                            factor: factor
+                        });
+                    }
+                });
+
+            });
+
+
+
+            namesSame.forEach((name) => {
+
+                if (resultOfKNN.length < filter && name.value === refs.length) {
+
+                    let find = false;
+
+                    resultOfKNN.forEach((r) => {
+                        if (name.name == r.name) {
+                            find = true;
+                        }
+                    })
+
+                    if (exclude) {
+                        exclude.forEach((user) => {
+                            if (name.name == user.nombre) {
+                                find = true;
+                            }
+                        });
+                    }
+
+                    if (!find) {
+                        resultOfKNN.push(name);
+                    }
+                }
+            });
+
+        }
+
+        return resultOfKNN;
+    }
+
     getRef(userKnn: KnnUser | string): KnnObject {
         let user = undefined;
         for (let i = 0; i < this.data.length; i++) {

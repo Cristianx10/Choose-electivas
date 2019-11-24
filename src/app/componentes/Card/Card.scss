@@ -5,7 +5,7 @@
 
     width: 250px;
     height: 120px;
-    @extend %box-shadow;
+  
 
     margin: 10px;
 
@@ -13,36 +13,60 @@
     justify-content: center;
     align-items: center;
 
-    border-radius: 15px;
-    background: $gray;
 
-    &__container{
+
+    &__container {
+
         width: 95%;
         height: 95%;
 
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
 
-        &__user{
+        &__select{
+            width: 20%;
 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input{
+                transform: scale(2);
+            }
         }
 
-        &__progress{
+
+        &__info {
+            @extend %box-shadow;
+            border-radius: 15px;
+            background: $gray;
+
+
+            width: 80%;
+            height: 100%;
+
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
+            justify-content: space-around;
 
-            width: 100%;
-            progress{
+            &__user {}
+
+            &__progress {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+
                 width: 100%;
+
+                progress {
+                    width: 100%;
+                }
             }
         }
     }
-  
- 
-   
+
+
+
 
     flex-direction: column;
 }
