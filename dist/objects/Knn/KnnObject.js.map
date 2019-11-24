@@ -1,1 +1,0 @@
-{"version":3,"file":"KnnObject.js","sourceRoot":"","sources":["../../../src/app/objects/Knn/KnnObject.ts"],"names":[],"mappings":";;AAAA,MAAM,SAAS;IAKX,YAAY,MAAc,EAAE,WAAwB;QAChD,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,QAAQ,GAAG,CAAC,CAAC;QAClB,IAAI,CAAC,WAAW,GAAG,WAAW,CAAC;IACnC,CAAC;CACJ;AAED,kBAAe,SAAS,CAAC"}

@@ -1,0 +1,60 @@
+@import "../../style/global.scss";
+@import "../../constant/size";
+
+.Desktop {
+
+    &__container{
+
+        @extend %max-width;
+        display: flex;
+
+        &__user,&__recomend{
+         
+            h1{
+                font-size: $size-h1;
+               
+            }
+        }
+        &__user{
+            width: 30%;
+
+            &__title{
+               
+
+                .profile{
+                    text-align: center;
+                    &__title{
+                        
+                        h1{
+                            margin: 10px 0;
+                        }
+                    }
+                }
+            }
+
+            &__information{
+                display: flex;
+                flex-wrap: wrap;
+
+                .CellValue{
+                    margin: 5px;
+                }
+
+            }
+        }
+
+        &__recomend{
+            width: 70%;
+
+            &__list{
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+    }
+}
+
+.CellValue{
+    display: flex;
+    flex-direction: column;
+}

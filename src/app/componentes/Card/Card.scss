@@ -1,9 +1,48 @@
-.Card{
+@import "../../constant/color";
+@import "../../style/global.scss";
+
+.Card {
+
+    width: 250px;
+    height: 120px;
+    @extend %box-shadow;
+
+    margin: 10px;
+
     display: flex;
-    width: 100px;
-    height: 70px;
+    justify-content: center;
+    align-items: center;
+
     border-radius: 15px;
-    background: lightblue;
+    background: $gray;
+
+    &__container{
+        width: 95%;
+        height: 95%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        &__user{
+
+        }
+
+        &__progress{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+
+            width: 100%;
+            progress{
+                width: 100%;
+            }
+        }
+    }
+  
+ 
+   
 
     flex-direction: column;
 }

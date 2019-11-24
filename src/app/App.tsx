@@ -39,8 +39,10 @@ const App = (props: IPropsApp) => {
 
     <>
       <Header />
+      <section className="body">
+        {rederPage(navegation.url)}
+      </section>
 
-      {rederPage(navegation.url)}
     </>
   );
 }
@@ -56,7 +58,7 @@ const mapStateToProps = (state: IStore) => {
 export default connect(mapStateToProps)(App);
 
 export var PAGE = {
-  HOME: "HOME", 
+  HOME: "HOME",
   DESKTOP: "DESKTOP"
 
 }
