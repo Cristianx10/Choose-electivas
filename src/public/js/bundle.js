@@ -852,39 +852,6 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
-/***/ "./src/app/data/lugares.csv":
-/*!**********************************!*\
-  !*** ./src/app/data/lugares.csv ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-eval("throw new Error(\"Module build failed (from ./node_modules/raw-loader/dist/cjs.js):\\nError: ENOENT: no such file or directory, open 'C:\\\\Users\\\\Zbook15\\\\OneDrive\\\\Universidad\\\\Septimo semestre\\\\Interacción sociotecnológica\\\\Final\\\\Aplication\\\\src\\\\app\\\\data\\\\lugares.csv'\");\n\n//# sourceURL=webpack:///./src/app/data/lugares.csv?");
-
-/***/ }),
-
-/***/ "./src/app/data/mix_electivas_lugares.csv":
-/*!************************************************!*\
-  !*** ./src/app/data/mix_electivas_lugares.csv ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-eval("throw new Error(\"Module build failed (from ./node_modules/raw-loader/dist/cjs.js):\\nError: ENOENT: no such file or directory, open 'C:\\\\Users\\\\Zbook15\\\\OneDrive\\\\Universidad\\\\Septimo semestre\\\\Interacción sociotecnológica\\\\Final\\\\Aplication\\\\src\\\\app\\\\data\\\\mix_electivas_lugares.csv'\");\n\n//# sourceURL=webpack:///./src/app/data/mix_electivas_lugares.csv?");
-
-/***/ }),
-
-/***/ "./src/app/data/persona.csv":
-/*!**********************************!*\
-  !*** ./src/app/data/persona.csv ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-eval("throw new Error(\"Module build failed (from ./node_modules/raw-loader/dist/cjs.js):\\nError: ENOENT: no such file or directory, open 'C:\\\\Users\\\\Zbook15\\\\OneDrive\\\\Universidad\\\\Septimo semestre\\\\Interacción sociotecnológica\\\\Final\\\\Aplication\\\\src\\\\app\\\\data\\\\persona.csv'\");\n\n//# sourceURL=webpack:///./src/app/data/persona.csv?");
-
-/***/ }),
-
 /***/ "./src/app/index.tsx":
 /*!***************************!*\
   !*** ./src/app/index.tsx ***!
@@ -1013,7 +980,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nex
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst ManagerKNN_1 = __importDefault(__webpack_require__(/*! ../../objects/Knn/ManagerKNN */ \"./src/app/objects/Knn/ManagerKNN.ts\"));\r\nconst loadFile_1 = __importDefault(__webpack_require__(/*! ../../objects/utils/loadFile */ \"./src/app/objects/utils/loadFile.ts\"));\r\nconst persona_csv_1 = __importDefault(__webpack_require__(/*! ../../data/persona.csv */ \"./src/app/data/persona.csv\"));\r\nconst lugares_csv_1 = __importDefault(__webpack_require__(/*! ../../data/lugares.csv */ \"./src/app/data/lugares.csv\"));\r\nconst mix_electivas_lugares_csv_1 = __importDefault(__webpack_require__(/*! ../../data/mix_electivas_lugares.csv */ \"./src/app/data/mix_electivas_lugares.csv\"));\r\nconst knnAction_1 = __webpack_require__(/*! ./actions/knnAction */ \"./src/app/redux/knn/actions/knnAction.ts\");\r\nconst loadFileCombine_1 = __importDefault(__webpack_require__(/*! ../../objects/utils/loadFileCombine */ \"./src/app/objects/utils/loadFileCombine.ts\"));\r\nexports.knnPersonas = new ManagerKNN_1.default(new loadFile_1.default(persona_csv_1.default).database);\r\nexports.knnLugares = new ManagerKNN_1.default(new loadFile_1.default(lugares_csv_1.default).database);\r\nvar loadFiles = new loadFileCombine_1.default(mix_electivas_lugares_csv_1.default);\r\nexports.knnMixElectivasLugares = new ManagerKNN_1.default(loadFiles.databaseA);\r\n///knnMixElectivasLugares.addToDatabase();\r\nexports.knnMixElectivasLugares.addToDatabase(loadFiles.databaseB);\r\nconsole.log(exports.knnMixElectivasLugares);\r\nexports.knnMixElectivasLugares.setDatabase(\"Marrakech\");\r\nvar refe = exports.knnMixElectivasLugares.getRef(\"Marrakech\");\r\nconsole.log(refe);\r\nconsole.log(exports.knnMixElectivasLugares.informationFilter(refe, 2));\r\nvar KnnDefaultState = {\r\n    knnObserver: exports.knnLugares\r\n};\r\nconst reducer = (_this = KnnDefaultState, { type, payload }) => {\r\n    const setKNNObserver = (knnObserver) => {\r\n        _this.knnObserver = knnObserver;\r\n    };\r\n    switch (type) {\r\n        case knnAction_1.type:\r\n            let result = payload;\r\n            break;\r\n        default:\r\n            break;\r\n    }\r\n    KnnDefaultState = _this;\r\n    return Object.assign({}, _this);\r\n};\r\nexports.default = reducer;\r\nexports.KNN_ACTION = {\r\n    setKnnObserver: { val: \"setKnnObserver\", option: { knnPersonas: \"knnPersonas\", knnLugares: \"knnLugares\" } }\r\n};\r\n\n\n//# sourceURL=webpack:///./src/app/redux/knn/knnAdmin.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst ManagerKNN_1 = __importDefault(__webpack_require__(/*! ../../objects/Knn/ManagerKNN */ \"./src/app/objects/Knn/ManagerKNN.ts\"));\r\nconst loadFile_1 = __importDefault(__webpack_require__(/*! ../../objects/utils/loadFile */ \"./src/app/objects/utils/loadFile.ts\"));\r\nconst knnAction_1 = __webpack_require__(/*! ./actions/knnAction */ \"./src/app/redux/knn/actions/knnAction.ts\");\r\nconst loadFileCombine_1 = __importDefault(__webpack_require__(/*! ../../objects/utils/loadFileCombine */ \"./src/app/objects/utils/loadFileCombine.ts\"));\r\nexports.knnPersonas = new ManagerKNN_1.default(new loadFile_1.default(DatabasePersonas).database);\r\nexports.knnLugares = new ManagerKNN_1.default(new loadFile_1.default(DatabaseLugares).database);\r\nvar loadFiles = new loadFileCombine_1.default(DataElectivasylugares);\r\nexports.knnMixElectivasLugares = new ManagerKNN_1.default(loadFiles.databaseA);\r\n///knnMixElectivasLugares.addToDatabase();\r\nexports.knnMixElectivasLugares.addToDatabase(loadFiles.databaseB);\r\nexports.knnMixElectivasLugares.setDatabase(\"Marrakech\");\r\nvar refe = exports.knnMixElectivasLugares.getRef(\"Marrakech\");\r\nvar KnnDefaultState = {\r\n    knnObserver: exports.knnLugares\r\n};\r\nconst reducer = (_this = KnnDefaultState, { type, payload }) => {\r\n    const setKNNObserver = (knnObserver) => {\r\n        _this.knnObserver = knnObserver;\r\n    };\r\n    switch (type) {\r\n        case knnAction_1.type:\r\n            let result = payload;\r\n            break;\r\n        default:\r\n            break;\r\n    }\r\n    KnnDefaultState = _this;\r\n    return Object.assign({}, _this);\r\n};\r\nexports.default = reducer;\r\nexports.KNN_ACTION = {\r\n    setKnnObserver: { val: \"setKnnObserver\", option: { knnPersonas: \"knnPersonas\", knnLugares: \"knnLugares\" } }\r\n};\r\n\n\n//# sourceURL=webpack:///./src/app/redux/knn/knnAdmin.ts?");
 
 /***/ }),
 

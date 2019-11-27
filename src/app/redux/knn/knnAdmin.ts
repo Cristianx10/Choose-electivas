@@ -1,9 +1,13 @@
 import ManagerKNN from '../../objects/Knn/ManagerKNN';
 import LoadFile from '../../objects/utils/loadFile';
 
-import DatabasePersonas from "../../data/persona.csv";
-import DatabaseLugares from "../../data/lugares.csv";
-import DataElectivasylugares from "../../data/mix_electivas_lugares.csv";
+import DatabaseElectivasVsInfo from "../../data/ELECTIVAS_VS_INFO.csv";
+import DatabaseElectivasVsLugares from "../../data/ELECTIVAS_VS_LUGARES.csv";
+import DatabaseLugaresVsInfo from "../../data/LUGARES_VS_INFO.csv";
+import DatabaseNameVsInfoElectivas from "../../data/NAME_VS_INFO_ELECTIVAS.csv";
+import DatabaseNameVsInfoLugares from "../../data/NAME_VS_INFO_LUGARES.csv";
+
+
 
 import { IStoreReducer } from '../store';
 import { type as knnAction } from './actions/knnAction';
@@ -19,13 +23,9 @@ export var knnMixElectivasLugares = new ManagerKNN(loadFiles.databaseA);
 ///knnMixElectivasLugares.addToDatabase();
 knnMixElectivasLugares.addToDatabase(loadFiles.databaseB);
 
-
-console.log(knnMixElectivasLugares)
 knnMixElectivasLugares.setDatabase("Marrakech");
 var refe = knnMixElectivasLugares.getRef("Marrakech");
 
-console.log(refe)
-console.log(knnMixElectivasLugares.informationFilter(refe, 2))
 
 
 var KnnDefaultState = {
