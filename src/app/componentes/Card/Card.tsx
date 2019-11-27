@@ -25,15 +25,17 @@ const Card = (props: IPropsCard) => {
             </section> : <></>}
 
             <section className="Card__container__info">
+                <article className="Card__container__info__container">
+                    <article className="Card__container__container__user">
+                        <h1>{nombre}</h1>
 
-                <article className="Card__container__user">
-                    <h1>{nombre}</h1>
+                    </article>
+                    <article className="Card__container__container__progress">
+                        <h1>{distance.toFixed(4)}</h1>
+                    </article>
+                </article>
+                <progress max={1} value={distance.toFixed(4)} />
 
-                </article>
-                <article className="Card__container__progress">
-                    <h1>{distance.toFixed(4)}</h1>
-                    <progress max={1} value={distance.toFixed(4)} />
-                </article>
 
             </section>
 

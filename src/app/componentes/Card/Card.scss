@@ -3,9 +3,9 @@
 
 .Card {
 
-    width: 250px;
+    width: 260px;
     height: 120px;
-  
+
 
     margin: 10px;
 
@@ -23,45 +23,83 @@
         display: flex;
         justify-content: center;
 
-        &__select{
+        &__select {
             width: 20%;
 
             display: flex;
             justify-content: center;
             align-items: center;
-            input{
+
+            input {
                 transform: scale(2);
             }
         }
 
 
         &__info {
+            width: 80%;
+
             @extend %box-shadow;
             border-radius: 15px;
             background: $gray;
 
-
-            width: 80%;
-            height: 100%;
-
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
 
-            &__user {}
 
-            &__progress {
+
+            &__container {
+
+
+                width: 80%;
+                height: 100%;
+
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: flex-end;
+                justify-content: space-around;
 
-                width: 100%;
 
-                progress {
+                &__user {}
+
+                &__progress {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-end;
+
                     width: 100%;
+
+
+                }
+
+            }
+
+            progress {
+                width: 100%;
+                -webkit-appearance: none;
+                background-color: $yellow;
+                border-radius: 15px;
+
+                &::-webkit-progress-bar {
+                    background-color: $green;
+                    border-radius: 15px;
+                }
+
+                &::-webkit-progress-value {
+                   
+                    background: $yellow;
+                    border-radius: 15px;
+                 
                 }
             }
+
+
+
+
+
+
         }
     }
 

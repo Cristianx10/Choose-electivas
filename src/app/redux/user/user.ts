@@ -16,7 +16,7 @@ var userDefaultState = {
     knnObserver: knnPersonas,
     similarsUsers: [] as KnnUser[],
     userInformation: [] as CellValue[],
-    numSimilarsUsers: 0,
+    numSimilarsUsers: 1,
 };
 
 const reducer = (_this = userDefaultState, { type, payload }: IStoreReducer) => {

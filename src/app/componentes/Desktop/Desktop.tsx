@@ -20,9 +20,10 @@ const Desktop = (props: IPropsDesktop) => {
 
     const user = useSelector((store: IStore) => store.user);
 
+
     const { knn, knnAction, setKnnObserver } = props;
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return <article className="Desktop">
         <article className="Desktop__container">
@@ -46,7 +47,6 @@ const Desktop = (props: IPropsDesktop) => {
                             return <div className="CellValue" key={i}>
                                 <div>{info.title}</div>
                                 <progress value={info.value} max="10" />
-
                             </div>
                         }
 
@@ -58,14 +58,18 @@ const Desktop = (props: IPropsDesktop) => {
                 <div className="Desktop__container__recomend__navegation">
                     <nav className="navegation">
                         <ul>
-                            <li onClick={() => setKnnObserver(knnPersonas)}><a>Personas</a></li>
-                            <li onClick={() => setKnnObserver(knnLugares)}><a>Materias</a></li>
+                            <li onClick={() => setKnnObserver(knnPersonas)}><a className={user.knnObserver === knnPersonas ? "select" : ""}>Personas</a></li>
+                            <li onClick={() => setKnnObserver(knnLugares)}><a className={user.knnObserver === knnLugares ? "select" : ""}>Materias</a></li>
+                            <li onClick={() => setKnnObserver(knnLugares)}><a>Mix</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div className="Desktop__container__recomend__config">
                     <h1>Usuarios Recomendados</h1>
-                    <input onChange={(e) => { dispatch({ type: setNumUserSimilars, payload: parseInt(e.target.value) }) }} type="number" />
+                    <div className="Desktop__container__recomend__config__filter">
+                        <h2>Filtrar:</h2>
+                        <input onChange={(e) => { dispatch({ type: setNumUserSimilars, payload: parseInt(e.target.value) }) }} type="number" defaultValue={user.numSimilarsUsers} />
+                    </div>
                 </div>
                 <div className="Desktop__container__recomend__list">
                     {user.knnObserver === knnPersonas ?

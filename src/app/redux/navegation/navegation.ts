@@ -1,10 +1,14 @@
 import { IStoreReducer } from '../store';
 import { type as serUrlPage } from './actions/serUrlPage';
+import { PAGE } from '../../App';
 
-var defaultState = { url: "" };
+var defaultState = {
+    url: PAGE.DESKTOP,
+   
+};
 
 const reducer = function (state = defaultState, { type, payload }: IStoreReducer) {
-    
+
     switch (type) {
         case serUrlPage:
             state.url = payload as string;

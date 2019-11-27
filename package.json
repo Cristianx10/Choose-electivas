@@ -4,6 +4,7 @@
   "description": "Complemento de celsia",
   "main": "index.js",
   "dependencies": {
+    "@types/node-sass": "^4.11.0",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.5",
@@ -36,7 +37,8 @@
   "scripts": {
     "start": "node src/index.js",
     "webpack": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "sass": "node-sass -o css src -w"
   },
   "author": "",
   "license": "ISC"

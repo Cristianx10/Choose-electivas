@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from '../../hook/UserContext';
 import "./Header.scss";
+
 import { connect } from "react-redux";
 import { IStore } from '../../redux/store';
 import { IUser } from '../../redux/user/user';

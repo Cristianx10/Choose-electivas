@@ -7,6 +7,8 @@ import Store from './redux/store';
 
 import "./style/reset.scss";
 
+
+
 render(<Provider store={Store}>
     <App />
 </Provider>, document.getElementById('app'));
