@@ -10,7 +10,6 @@ import ManagerKNN from '../../objects/Knn/ManagerKNN';
 import { knnNameElectivas } from '../knn/databaseFiles';
 
 
-
 var userDefaultState = {
     name: "Nombre de usuario",
     usuarios: knnNameElectivas.getAllName() as string[],
