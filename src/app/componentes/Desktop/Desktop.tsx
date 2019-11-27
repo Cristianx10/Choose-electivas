@@ -1,9 +1,9 @@
 import React from "react";
-import { connect, } from 'react-redux';
+import { connect, useDispatch, useSelector, } from 'react-redux';
 import { IStore } from '../../redux/store';
 import { IUser } from '../../redux/user/user';
 import Card from '../Card/Card';
-import setNumUserSimilars from '../../redux/user/actions/setNumUserSimilars';
+import { type as setNumUserSimilars } from '../../redux/user/actions/setNumUserSimilars';
 
 import "./Desktop.scss";
 import { IKnn, KNN_ACTION, knnPersonas, knnLugares } from '../../redux/knn/knnAdmin';
@@ -11,21 +11,18 @@ import knnAction from '../../redux/knn/actions/knnAction';
 import setKnnObserver from '../../redux/knn/actions/setKnnObserver';
 
 interface IPropsDesktop {
-    user: IUser;
     knn: IKnn;
-    setNumUserSimilars: Function;
     knnAction: Function;
     setKnnObserver: Function;
 }
 
 const Desktop = (props: IPropsDesktop) => {
 
-    const { user, setNumUserSimilars } = props;
+    const user = useSelector((store: IStore) => store.user);
 
     const { knn, knnAction, setKnnObserver } = props;
 
-
-
+    const dispatch = useDispatch()
 
     return <article className="Desktop">
         <article className="Desktop__container">
@@ -68,7 +65,7 @@ const Desktop = (props: IPropsDesktop) => {
                 </div>
                 <div className="Desktop__container__recomend__config">
                     <h1>Usuarios Recomendados</h1>
-                    <input onChange={(e) => { setNumUserSimilars(parseInt(e.target.value)) }} type="number" />
+                    <input onChange={(e) => { dispatch({ type: setNumUserSimilars, payload: parseInt(e.target.value) }) }} type="number" />
                 </div>
                 <div className="Desktop__container__recomend__list">
                     {user.knnObserver === knnPersonas ?
@@ -93,13 +90,11 @@ const Desktop = (props: IPropsDesktop) => {
 
 const mapStateToProps = (store: IStore) => {
     return {
-        user: store.user,
         knn: store.knnAdmin
     }
 }
 
 const mapActionsToProps = {
-    setNumUserSimilars,
     knnAction,
     setKnnObserver
 }
