@@ -10,40 +10,38 @@ class ManagerKNN {
     database: Database[];
     dataObserver: KnnObject[];
 
-    constructor(database?: Database) {
+    constructor(database?: Database[]) {
         this.titulares = [];
-        this.database = [];
+        this.database = database ? database : [];
         this.dataObserver = [];
 
-        if (database) {
-            this.database.push(database);
 
-            this.database[0].data.forEach((datos, i) => {
-                let name = "Undefined";
-                if (i == 0) {
-                    this.titulares = datos;
-                } else {
-                    let cellInformation: CellValue[] = [];
-                    datos.forEach((dato, i) => {
-                        let datoResult: number = parseFloat(dato);
-                        let datoCell: string | number = dato;
-                        if (datoResult) {
-                            datoCell = datoResult;
-                        }
+        this.database[0].data.forEach((datos, i) => {
+            let name = "Undefined";
+            if (i == 0) {
+                this.titulares = datos;
+            } else {
+                let cellInformation: CellValue[] = [];
+                datos.forEach((dato, i) => {
+                    let datoResult: number = parseFloat(dato);
+                    let datoCell: string | number = dato;
+                    if (datoResult) {
+                        datoCell = datoResult;
+                    }
 
-                        let cell = new CellValue(this.titulares[i], datoCell);
-                        if (i === 0) {
-                            name = cell.value + "";
-                            console.log()
-                        }
-                        cellInformation.push(cell);
-                    });
+                    let cell = new CellValue(this.titulares[i], datoCell);
+                    if (i === 0) {
+                        name = cell.value + "";
+                        console.log()
+                    }
+                    cellInformation.push(cell);
+                });
 
-                    let knnObject = new KnnObject(name, cellInformation);
-                    this.dataObserver.push(knnObject);
-                }
-            });
-        }
+                let knnObject = new KnnObject(name, cellInformation);
+                this.dataObserver.push(knnObject);
+            }
+        });
+
     }
 
     addToDatabase(database: Database) {
@@ -96,7 +94,7 @@ class ManagerKNN {
 
         }
 
-        if(!found){
+        if (!found) {
             console.log("No se encontro Base de datos ")
         }
 

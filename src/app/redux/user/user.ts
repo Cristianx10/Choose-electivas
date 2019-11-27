@@ -4,16 +4,17 @@ import { type as setUserPrincipal } from './actions/setUserPrincipal';
 import { type as setNumUserSimilars } from './actions/setNumUserSimilars';
 import KnnUser from '../../objects/Knn/KnnUser';
 import CellValue from '../../objects/Knn/CellValue';
-import { knnPersonas } from '../knn/knnAdmin';
 import { type as setKnnObserver } from '../knn/actions/setKnnObserver';
+
 import ManagerKNN from '../../objects/Knn/ManagerKNN';
+import { knnNameElectivas } from '../knn/databaseFiles';
 
 
 
 var userDefaultState = {
     name: "Nombre de usuario",
-    usuarios: knnPersonas.getAllName() as string[],
-    knnObserver: knnPersonas,
+    usuarios: knnNameElectivas.getAllName() as string[],
+    knnObserver: knnNameElectivas,
     similarsUsers: [] as KnnUser[],
     userInformation: [] as CellValue[],
     numSimilarsUsers: 1,
@@ -22,7 +23,7 @@ var userDefaultState = {
 const reducer = (_this = userDefaultState, { type, payload }: IStoreReducer) => {
 
     var findSimilarUser = () => {
-        let ref = knnPersonas.getRef(_this.name);
+        let ref = knnNameElectivas.getRef(_this.name);
         _this.userInformation = ref.information;
         _this.similarsUsers = _this.knnObserver.calculate(ref, _this.numSimilarsUsers);
     }

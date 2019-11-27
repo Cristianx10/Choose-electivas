@@ -6,9 +6,10 @@ import Card from '../Card/Card';
 import { type as setNumUserSimilars } from '../../redux/user/actions/setNumUserSimilars';
 
 import "./Desktop.scss";
-import { IKnn, KNN_ACTION, knnPersonas, knnLugares } from '../../redux/knn/knnAdmin';
+import { IKnn, KNN_ACTION } from '../../redux/knn/knnAdmin';
 import knnAction from '../../redux/knn/actions/knnAction';
 import setKnnObserver from '../../redux/knn/actions/setKnnObserver';
+import { knnNameElectivas, knnNameLugares } from '../../redux/knn/databaseFiles';
 
 interface IPropsDesktop {
     knn: IKnn;
@@ -58,9 +59,9 @@ const Desktop = (props: IPropsDesktop) => {
                 <div className="Desktop__container__recomend__navegation">
                     <nav className="navegation">
                         <ul>
-                            <li onClick={() => setKnnObserver(knnPersonas)}><a className={user.knnObserver === knnPersonas ? "select" : ""}>Personas</a></li>
-                            <li onClick={() => setKnnObserver(knnLugares)}><a className={user.knnObserver === knnLugares ? "select" : ""}>Materias</a></li>
-                            <li onClick={() => setKnnObserver(knnLugares)}><a>Mix</a></li>
+                            <li onClick={() => setKnnObserver(knnNameElectivas)}><a className={user.knnObserver === knnNameElectivas ? "select" : ""}>Personas</a></li>
+                            <li onClick={() => setKnnObserver(knnNameLugares)}><a className={user.knnObserver === knnNameLugares ? "select" : ""}>Materias</a></li>
+                            <li ><a>Mix</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -72,7 +73,7 @@ const Desktop = (props: IPropsDesktop) => {
                     </div>
                 </div>
                 <div className="Desktop__container__recomend__list">
-                    {user.knnObserver === knnPersonas ?
+                    {user.knnObserver === knnNameElectivas ?
                         <div className="personas">
                             {user.similarsUsers.map((result, i) => {
                                 return <Card referencia={result} state={false} key={i} />
