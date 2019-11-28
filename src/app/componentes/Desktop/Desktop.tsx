@@ -6,26 +6,22 @@ import Card from '../Card/Card';
 
 import { type as setNumUserSimilars } from '../../redux/user/actions/setNumUserSimilars';
 import { type as setNumConsensoSimilars } from '../../redux/user/actions/setNumConsensoSimilars';
-
-import "./Desktop.scss";
-import { IKnn, KNN_ACTION } from '../../redux/knn/knnAdmin';
-import knnAction from '../../redux/knn/actions/knnAction';
-import setKnnObserver from '../../redux/knn/actions/setKnnObserver';
-import { knnNameElectivas, knnNameLugares, knnElectivas, knnLugares } from '../../redux/knn/databaseFiles';
-import BarOption from "../BarOption/BarOption";
+import { type as setKnnObserver } from '../../redux/knn/actions/setKnnObserver';
 import { type as setKnnObserverConsenso } from '../../redux/user/actions/setKnnObserverConsenso';
 
+
+import "./Desktop.scss";
+import { IKnn } from '../../redux/knn/knnAdmin';
+import { knnNameElectivas, knnNameLugares, knnElectivas, knnLugares } from '../../redux/knn/databaseFiles';
+
+
 interface IPropsDesktop {
-    knn: IKnn;
-    knnAction: Function;
-    setKnnObserver: Function;
+
 }
 
 const Desktop = (props: IPropsDesktop) => {
 
     const user = useSelector((store: IStore) => store.user);
-
-    const { knn, knnAction, setKnnObserver } = props;
 
     const [actionSearch, setActionSearch] = useState(ACTION_SEARCH.PERSON_ELECTIVA);
 
@@ -56,28 +52,10 @@ const Desktop = (props: IPropsDesktop) => {
                         break;
 
                     case COM.CLASS:
-                        if (user.refKnnName === knnNameElectivas) {
-                            if (user.knnObserverConsenso === knnNameElectivas) {
-                                change = "select";
-                            }
-                            if (user.knnObserver === knnNameElectivas) {
 
-                            }
-                        } else if (user.refKnnName === knnElectivas) {
-                            if (user.knnObserverConsenso === knnElectivas) {
-                                change = "select";
-                            }
-                        }
                         break;
                     case COM.CHANGE:
-                        if (user.refKnnName === knnNameElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnNameElectivas });
-                            setKnnObserver(knnNameElectivas);
-                            // setActionSearch(ACTION_SEARCH.PERSON_ELECTIVA);
-                        } else if (user.refKnnName === knnElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnElectivas })
-                            setKnnObserver(knnElectivas);
-                        }
+
                         break;
                     case COM.DESCRIPTION:
                         description = "Te gusta estudiar pero no sabes con quien, porque no invitas a estas personas, ellas tambien tienes facultades similares para estudiar."
@@ -104,26 +82,10 @@ const Desktop = (props: IPropsDesktop) => {
                         break;
                     case COM.CLASS:
 
-                        if (user.refKnnName === knnNameElectivas) {
-                            if (user.knnObserverConsenso === knnElectivas) {
-                                change = "select";
-                            }
-                        } else if (user.refKnnName === knnElectivas) {
-                            if (user.knnObserverConsenso === knnNameElectivas) {
-                                change = "select";
-                            }
-                        }
 
                         break;
                     case COM.CHANGE:
-                        if (user.refKnnName === knnNameElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnElectivas })
-                            setKnnObserver(knnNameElectivas)
-                            //setActionSearch(ACTION_SEARCH.PERSON_LUGAR);
-                        } else if (user.refKnnName === knnElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnNameElectivas })
-                            setKnnObserver(knnNameElectivas)
-                        }
+
 
                         break;
                     case COM.DESCRIPTION:
@@ -133,25 +95,7 @@ const Desktop = (props: IPropsDesktop) => {
                 break;
             case ACTION_SEARCH.ELECTIVA:
                 switch (action) {
-                    case COM.CHANGE:
-                        if (user.refKnnName === knnNameElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnNameElectivas });
-                            setKnnObserver(knnElectivas);
-                            // setActionSearch(ACTION_SEARCH.PERSON_ELECTIVA);
-                        } else if (user.refKnnName === knnElectivas) {
-                            dispatch({ type: setKnnObserverConsenso, payload: knnElectivas })
-                            setKnnObserver(knnElectivas);
-                        }
-                        break;
 
-                    case COM.CLASS:
-                        if (user.refKnnName === knnNameElectivas) {
-                            if (user.knnObserverConsenso === knnElectivas) {
-                                change = "select";
-                            }
-                        } 
-
-                        break;
                 }
         }
 
@@ -236,9 +180,18 @@ const Desktop = (props: IPropsDesktop) => {
                     <div className="Desktop__container__recomend__navegation__nav">
                         <nav className="navegation">
                             <ul>
-                                <li onClick={() => chooseActionSearch(ACTION_SEARCH.PERSON_ELECTIVA, COM.CHANGE)}><a className={chooseActionSearch(ACTION_SEARCH.PERSON_ELECTIVA, COM.CLASS)}>{accionA}</a></li>
-                                <li onClick={() => chooseActionSearch(ACTION_SEARCH.PERSON_LUGAR, COM.CHANGE)}><a className={chooseActionSearch(ACTION_SEARCH.PERSON_LUGAR, COM.CLASS)}>{accionB}</a></li>
-                                <li onClick={() => chooseActionSearch(ACTION_SEARCH.ELECTIVA, COM.CHANGE)}><a className={chooseActionSearch(ACTION_SEARCH.ELECTIVA, COM.CLASS)}>Mix</a></li>
+                                <li onClick={() => {
+                                    dispatch({ type: setKnnObserver, payload: knnNameElectivas })
+                                }}><a className={
+                                    user.knnObserver === knnNameElectivas ? "select" : ""
+                                }>Personas</a></li>
+
+                                <li onClick={() => {
+                                    dispatch({ type: setKnnObserver, payload: knnElectivas })
+
+                                }}><a className={
+                                    user.knnObserver === knnElectivas ? "select" : ""
+                                }>Materias</a></li>
 
                             </ul>
                         </nav>
@@ -259,12 +212,43 @@ const Desktop = (props: IPropsDesktop) => {
                     {chooseActionSearch(actionSearch, COM.VIEW)}
                 </div>
 
-                <div className="Desktop__container__recomend__mix">
-                    <h1>Todos los usuario pueden tienen en comun</h1>
-                    <div className="Desktop__container__recomend__config__filter">
-                        <h2>Filtrar:</h2>
-                        <input onChange={(e) => { dispatch({ type: setNumConsensoSimilars, payload: parseInt(e.target.value) }) }} type="number" defaultValue={user.numConsensosUsers} />
+
+                <div className="Desktop__container__recomend__navegation">
+                    <div className="Desktop__container__recomend__navegation__title">
+                        <h1>¿Que te gustaria hacer en nuestra APP?</h1>
                     </div>
+                    <div className="Desktop__container__recomend__navegation__nav">
+                        <nav className="navegation">
+                            <ul>
+                                <li onClick={() => {
+                                    dispatch({ type: setKnnObserverConsenso, payload: knnNameElectivas })
+                                }}><a className={
+                                    user.knnObserverConsenso === knnNameElectivas ? "select" : ""
+                                }>Personas</a></li>
+
+                                <li onClick={() => {
+                                    dispatch({ type: setKnnObserverConsenso, payload: knnElectivas })
+
+                                }}><a className={
+                                    user.knnObserverConsenso === knnElectivas ? "select" : ""
+                                }>Materias</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+
+
+                    <div className="Desktop__container__recomend__mix">
+                        <h1>Todos los usuario pueden tienen en comun</h1>
+                        <div className="Desktop__container__recomend__config__filter">
+                            <h2>Filtrar:</h2>
+                            <input onChange={(e) => { dispatch({ type: setNumConsensoSimilars, payload: parseInt(e.target.value) }) }} type="number" defaultValue={user.numConsensosUsers} />
+                        </div>
+                    </div>
+                    <div className="Desktop__container__recomend__navegation__title">
+                        <h1>{chooseActionSearch(actionSearch, COM.DESCRIPTION)}</h1>
+                    </div>
+
                 </div>
                 <div className="Desktop__container__recomend__list">
                     {chooseActionSearch(actionSearch, COM.VIEW_COMUN)}
@@ -275,18 +259,7 @@ const Desktop = (props: IPropsDesktop) => {
     </article >
 }
 
-const mapStateToProps = (store: IStore) => {
-    return {
-        knn: store.knnAdmin
-    }
-}
-
-const mapActionsToProps = {
-    knnAction,
-    setKnnObserver
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Desktop);
+export default Desktop;
 
 
 var ACTION_SEARCH = {
