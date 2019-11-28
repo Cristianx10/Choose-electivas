@@ -3,7 +3,9 @@ import { connect, useDispatch, useSelector, } from 'react-redux';
 import { IStore } from '../../redux/store';
 import { IUser } from '../../redux/user/user';
 import Card from '../Card/Card';
+
 import { type as setNumUserSimilars } from '../../redux/user/actions/setNumUserSimilars';
+import {type as setNumConsensoSimilars} from '../../redux/user/actions/setNumConsensoSimilars';
 
 import "./Desktop.scss";
 import { IKnn, KNN_ACTION } from '../../redux/knn/knnAdmin';
@@ -44,6 +46,14 @@ const Desktop = (props: IPropsDesktop) => {
                             })}
                         </div>
                         break;
+                    case COM.VIEW_COMUN:
+                        console.log("Podifodjsifsdifojsdoifjsdiofjsdiofjisdofjiodsjio", user.similarsConsenso)
+                        view = <div className="personas">
+                            {user.similarsConsenso.map((result, i) => {
+                                return <Card voto={result} state={false} key={i} />
+                            })}
+                        </div>
+                        break;
                     case COM.CLASS:
                         if (user.refKnnName === knnNameElectivas) {
                             if (user.knnObserver === knnNameElectivas) {
@@ -78,8 +88,16 @@ const Desktop = (props: IPropsDesktop) => {
                             })}
                         </section>
                         break;
+                    case COM.VIEW_COMUN:
+                        console.log("Podifodjsifsdifojsdoifjsdiofjsdiofjisdofjiodsjio")
+                        view = <section className="Desktop__container__recomend__list__item lugares">
+                            {user.similarsConsenso.map((result, i) => {
+                                return <Card voto={result} state={false} key={i} />
+                            })}
+                        </section>
+                        break;
                     case COM.CLASS:
-                      
+
                         if (user.refKnnName === knnNameElectivas) {
                             if (user.knnObserver === knnNameLugares) {
                                 change = "select";
@@ -108,6 +126,9 @@ const Desktop = (props: IPropsDesktop) => {
 
         switch (action) {
             case COM.VIEW:
+                return view;
+                break;
+            case COM.VIEW_COMUN:
                 return view;
                 break;
             case COM.CLASS:
@@ -207,6 +228,17 @@ const Desktop = (props: IPropsDesktop) => {
                 <div className="Desktop__container__recomend__list">
                     {chooseActionSearch(actionSearch, COM.VIEW)}
                 </div>
+
+                <div className="Desktop__container__recomend__mix">
+                    <h1>Todos los usuario pueden tienen en comun</h1>
+                    <div className="Desktop__container__recomend__config__filter">
+                        <h2>Filtrar:</h2>
+                        <input onChange={(e) => { dispatch({ type: setNumConsensoSimilars, payload: parseInt(e.target.value) }) }} type="number" defaultValue={user.numConsensosUsers} />
+                    </div>
+                </div>
+                <div className="Desktop__container__recomend__list">
+                    {chooseActionSearch(actionSearch, COM.VIEW_COMUN)}
+                </div>
             </section>
 
         </article>
@@ -236,6 +268,7 @@ var COM = {
     TITLE: "TITLE",
     CLASS: "CLASS",
     VIEW: "VIEW",
+    VIEW_COMUN: "VIEW_COMUN",
     CHANGE: "CHANGE",
     DESCRIPTION: "DESCRIPTION"
 }

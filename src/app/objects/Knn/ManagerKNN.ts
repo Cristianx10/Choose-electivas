@@ -41,6 +41,8 @@ class ManagerKNN {
             }
         });
 
+        console.log(this.dataObserver)
+
     }
 
     addToDatabase(database: Database) {
@@ -118,8 +120,6 @@ class ManagerKNN {
             knnRef = ref;
         }
 
-        var queryDates = knnDate.information;
-        var queryRefs = knnRef.information;
 
         let distCoseno = 0;
         let distance = 0;
@@ -127,20 +127,27 @@ class ManagerKNN {
         let acumulateA = 0;
         let acumulateB = 0;
 
-        for (let index = 0; index < queryDates.length; index++) {
-            let queryDate = queryDates[index];
-            let queryRef = queryRefs[index];
+        if (queryDates && queryRefs) {
 
-            if (queryDate && queryRef) {
+            var queryDates = knnDate.information;
+            var queryRefs = knnRef.information;
 
-                if (isNaN(queryDate.value as number) == false && queryRef.value <= MAX_VALUE) {
-                    let valDate = queryDates[index].value as number;
-                    let valRef = queryRefs[index].value as number;
-                    distance += valDate * valRef;
-                    acumulateA += Math.pow(valDate, 2);
-                    acumulateB += Math.pow(valRef, 2);
+            for (let index = 0; index < queryDates.length; index++) {
+                let queryDate = queryDates[index];
+                let queryRef = queryRefs[index];
+
+                if (queryDate && queryRef) {
+
+                    if (isNaN(queryDate.value as number) == false && queryRef.value <= MAX_VALUE) {
+                        let valDate = queryDates[index].value as number;
+                        let valRef = queryRefs[index].value as number;
+                        distance += valDate * valRef;
+                        acumulateA += Math.pow(valDate, 2);
+                        acumulateB += Math.pow(valRef, 2);
+                    }
                 }
             }
+
         }
 
         let productoA = Math.sqrt(acumulateA);
@@ -154,12 +161,13 @@ class ManagerKNN {
             distCoseno = 0;
         }
 
-
-
         return distCoseno;
     }
 
     calculate(reference: KnnUser | KnnObject, filter: number) {
+        console.log("Mi referencia")
+        console.log(reference)
+        console.log(this)
 
         let ref: KnnObject;
         if (reference instanceof KnnObject) {
@@ -167,6 +175,11 @@ class ManagerKNN {
         } else if (reference instanceof KnnUser) {
             ref = this.getRef(reference)
         }
+
+
+        console.log(ref)
+        console.log("Mi referencia-----------")
+
 
         let resultData: KnnUser[] = [];
 
@@ -183,6 +196,7 @@ class ManagerKNN {
 
             let userKnns: KnnUser[] = [];
             this.dataObserver.forEach((user) => {
+
                 userKnns.push(new KnnUser(user.nombre, user.distance));
             })
 
@@ -190,7 +204,9 @@ class ManagerKNN {
                 let dato = userKnns[i];
 
                 if (dato.nombre != ref.nombre) {
+
                     resultData.push(dato);
+
                 }
             }
         }
@@ -202,8 +218,7 @@ class ManagerKNN {
         var result: KnnUser[] = [];
         var resultOfKNN: VotoKnn[] = [];
 
-
-
+        console.log(queryRef)
         let factor = 0;
         while (result.length < secondFilter && factor + 1 < queryRef.dataObserver.length) {
 
@@ -211,12 +226,18 @@ class ManagerKNN {
 
             let userRefs = this.calculate(ref, firtsFilter);
             let secondUserRefs: KnnUser[][] = [];
-            secondUserRefs.push(queryRef.calculate(ref, factor))
+
+            console.log("------------------------")
+          
+            secondUserRefs.push(queryRef.calculate(ref, factor));
 
             for (let i = 0; i < userRefs.length; i++) {
                 let userRef = userRefs[i];
+                console.log(i)
                 secondUserRefs.push(queryRef.calculate(userRef, factor));
-            }
+            } 
+
+           
 
             let namesSame: VotoKnn[] = [];
 
@@ -282,6 +303,7 @@ class ManagerKNN {
             let userRefs: KnnUser[][] = [];
 
             refs.forEach((ref) => {
+
                 let result = this.calculate(ref, factor);
                 userRefs.push(result);
             });
@@ -519,7 +541,7 @@ class ManagerKNN {
     }
 }
 
-interface VotoKnn {
+export interface VotoKnn {
     name: string;
     object: KnnUser;
     value: number;

@@ -5,29 +5,32 @@ import { useSelector } from "react-redux";
 import { IStore } from '../../redux/store';
 import { IUser } from '../../redux/user/user';
 import { knnElectivas } from '../../redux/knn/databaseFiles';
+import { VotoKnn } from '../../objects/Knn/ManagerKNN';
 
 interface IPropsCard {
-    referencia: KnnUser;
+    referencia?: KnnUser;
+    voto?: VotoKnn;
     state: boolean
 }
 
 const Card = (props: IPropsCard) => {
 
-    const { nombre, distance } = props.referencia;
+    var nombre = props.referencia ? props.referencia.nombre : props.voto.name;
+    var distance = props.referencia ? props.referencia.distance : props.voto.factor;
 
     const [select, setSelect] = useState(false);
 
-    const user = useSelector((store: IStore) => store.user );
+    const user = useSelector((store: IStore) => store.user);
 
     const chooseAction = () => {
 
     }
 
     var style = {};
- 
 
-    if(user.knnObserver === knnElectivas){
-        style ={fontSize:".5em"}
+
+    if (user.knnObserver === knnElectivas) {
+        style = { fontSize: ".5em" }
     }
 
     const onClick = () => {

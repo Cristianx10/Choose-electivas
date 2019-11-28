@@ -89,6 +89,20 @@
                 }
             }
 
+            &__mix {
+                display: flex;
+                justify-content: space-between;
+
+                &__filter {
+                    display: flex;
+                    align-items: center;
+
+                    h2 {
+                        margin: 0 10px;
+                    }
+                }
+            }
+
             &__navegation {
 
                 display: flex;
