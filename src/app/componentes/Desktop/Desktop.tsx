@@ -5,7 +5,7 @@ import { IUser } from '../../redux/user/user';
 import Card from '../Card/Card';
 
 import { type as setNumUserSimilars } from '../../redux/user/actions/setNumUserSimilars';
-import {type as setNumConsensoSimilars} from '../../redux/user/actions/setNumConsensoSimilars';
+import { type as setNumConsensoSimilars } from '../../redux/user/actions/setNumConsensoSimilars';
 
 import "./Desktop.scss";
 import { IKnn, KNN_ACTION } from '../../redux/knn/knnAdmin';
@@ -13,6 +13,7 @@ import knnAction from '../../redux/knn/actions/knnAction';
 import setKnnObserver from '../../redux/knn/actions/setKnnObserver';
 import { knnNameElectivas, knnNameLugares, knnElectivas, knnLugares } from '../../redux/knn/databaseFiles';
 import BarOption from "../BarOption/BarOption";
+import {type as setKnnObserverConsenso} from '../../redux/user/actions/setKnnObserverConsenso';
 
 interface IPropsDesktop {
     knn: IKnn;
@@ -55,18 +56,20 @@ const Desktop = (props: IPropsDesktop) => {
                         </div>
                         break;
                     case COM.CLASS:
+
                         if (user.refKnnName === knnNameElectivas) {
-                            if (user.knnObserver === knnNameElectivas) {
+                            if (user.knnObserverConsenso === knnNameElectivas) {
                                 change = "select";
                             }
                         } else if (user.refKnnName === knnElectivas) {
-                            if (user.knnObserver === knnElectivas) {
+                            if (user.knnObserver === knnNameElectivas) {
                                 change = "select";
                             }
                         }
                         break;
                     case COM.CHANGE:
                         if (user.refKnnName === knnNameElectivas) {
+                            dispatch({ type: setKnnObserverConsenso, payload:knnNameElectivas})
                             setKnnObserver(knnNameElectivas)
                             // setActionSearch(ACTION_SEARCH.PERSON_ELECTIVA);
                         } else if (user.refKnnName === knnElectivas) {
@@ -99,7 +102,7 @@ const Desktop = (props: IPropsDesktop) => {
                     case COM.CLASS:
 
                         if (user.refKnnName === knnNameElectivas) {
-                            if (user.knnObserver === knnNameLugares) {
+                            if (user.knnObserverConsenso === knnElectivas) {
                                 change = "select";
                             }
                         } else if (user.refKnnName === knnElectivas) {
@@ -110,7 +113,8 @@ const Desktop = (props: IPropsDesktop) => {
                         break;
                     case COM.CHANGE:
                         if (user.refKnnName === knnNameElectivas) {
-                            setKnnObserver(knnNameLugares)
+                            dispatch({ type: setKnnObserverConsenso, payload:knnElectivas})
+                            setKnnObserver(knnNameElectivas)
                             //setActionSearch(ACTION_SEARCH.PERSON_LUGAR);
                         } else if (user.refKnnName === knnElectivas) {
                             setKnnObserver(knnNameElectivas)
@@ -149,7 +153,7 @@ const Desktop = (props: IPropsDesktop) => {
 
     if (user.refKnnName === knnNameElectivas) {
         accionA = "Estudiar";
-        accionB = "Viajar";
+        accionB = "Materias";
     } else if (user.refKnnName === knnElectivas) {
         accionA = "Materias";
         accionB = "Personas";

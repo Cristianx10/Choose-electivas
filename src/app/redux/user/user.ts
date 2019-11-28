@@ -40,7 +40,7 @@ const reducer = (_this = userDefaultState, { type, payload }: IStoreReducer) => 
         if (ref) {
             _this.userInformation = ref.information;
             _this.similarsUsers = _this.knnObserver.calculate(ref, _this.numSimilarsUsers);
-
+/*
             if (_this.refKnnName === knnNameElectivas) {
                 if (_this.knnObserver === knnNameElectivas) {
                     _this.knnObserverConsenso = knnNameElectivas;
@@ -53,7 +53,7 @@ const reducer = (_this = userDefaultState, { type, payload }: IStoreReducer) => 
                 }
 
             }
-
+*/
             _this.similarsConsenso = _this.refKnnName.consensoUser(ref, _this.knnObserverConsenso, _this.numSimilarsUsers, _this.numConsensosUsers).resultKnn;
 
         }

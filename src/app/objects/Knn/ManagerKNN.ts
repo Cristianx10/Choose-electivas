@@ -41,7 +41,7 @@ class ManagerKNN {
             }
         });
 
-        console.log(this.dataObserver)
+        
 
     }
 
@@ -79,7 +79,7 @@ class ManagerKNN {
 
                     if (name === dateFind) {
                         found = true;
-                        console.log("Base de datos encontrada")
+                        
                     }
 
                     let knnObject = new KnnObject(name, cellInformation);
@@ -96,7 +96,7 @@ class ManagerKNN {
         }
 
         if (!found) {
-            console.log("No se encontro Base de datos ")
+            
         }
 
 
@@ -164,21 +164,14 @@ class ManagerKNN {
         return distCoseno;
     }
 
-    calculate(reference: KnnUser | KnnObject, filter: number) {
-        console.log("Mi referencia")
-        console.log(reference)
-        console.log(this)
-
+    calculate(reference: KnnObject, filter: number) {
+        
         let ref: KnnObject;
         if (reference instanceof KnnObject) {
             ref = reference;
-        } else if (reference instanceof KnnUser) {
-            ref = this.getRef(reference)
         }
 
-
-        console.log(ref)
-        console.log("Mi referencia-----------")
+        
 
 
         let resultData: KnnUser[] = [];
@@ -218,7 +211,7 @@ class ManagerKNN {
         var result: KnnUser[] = [];
         var resultOfKNN: VotoKnn[] = [];
 
-        console.log(queryRef)
+        
         let factor = 0;
         while (result.length < secondFilter && factor + 1 < queryRef.dataObserver.length) {
 
@@ -227,14 +220,14 @@ class ManagerKNN {
             let userRefs = this.calculate(ref, firtsFilter);
             let secondUserRefs: KnnUser[][] = [];
 
-            console.log("------------------------")
-          
+            
             secondUserRefs.push(queryRef.calculate(ref, factor));
 
             for (let i = 0; i < userRefs.length; i++) {
                 let userRef = userRefs[i];
-                console.log(i)
-                secondUserRefs.push(queryRef.calculate(userRef, factor));
+                let refUserV = this.getRef(userRef);
+                
+                secondUserRefs.push(queryRef.calculate(refUserV, factor));
             } 
 
            
