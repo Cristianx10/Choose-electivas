@@ -29,7 +29,7 @@ const Card = (props: IPropsCard) => {
     var style = {};
 
 
-    if (user.knnObserver === knnElectivas) {
+    if (user.knnObserver === knnElectivas || user.knnObserverConsenso === knnElectivas) {
         style = { fontSize: ".5em" }
     }
 

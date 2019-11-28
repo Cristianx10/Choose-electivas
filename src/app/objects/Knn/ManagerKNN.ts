@@ -41,7 +41,7 @@ class ManagerKNN {
             }
         });
 
-        
+
 
     }
 
@@ -79,7 +79,7 @@ class ManagerKNN {
 
                     if (name === dateFind) {
                         found = true;
-                        
+
                     }
 
                     let knnObject = new KnnObject(name, cellInformation);
@@ -96,30 +96,17 @@ class ManagerKNN {
         }
 
         if (!found) {
-            
+
         }
 
 
     }
 
 
-    evaluateDistCoseno(data: KnnUser | KnnObject, ref: KnnUser | KnnObject) {
+    evaluateDistCoseno(data: KnnObject, ref: KnnObject | KnnObject) {
 
-        var knnDate;
-        var knnRef;
-
-        if (data instanceof KnnUser) {
-            knnDate = this.getRef(data);
-        } else {
-            knnDate = data;
-        }
-
-        if (ref instanceof KnnUser) {
-            knnRef = this.getRef(ref);
-        } else {
-            knnRef = ref;
-        }
-
+        var knnDate = data;
+        var knnRef = ref;
 
         let distCoseno = 0;
         let distance = 0;
@@ -127,10 +114,11 @@ class ManagerKNN {
         let acumulateA = 0;
         let acumulateB = 0;
 
-        if (queryDates && queryRefs) {
+        var queryDates = knnDate.information;
+        var queryRefs = knnRef.information;
 
-            var queryDates = knnDate.information;
-            var queryRefs = knnRef.information;
+        if (queryDates && queryRefs) {
+            
 
             for (let index = 0; index < queryDates.length; index++) {
                 let queryDate = queryDates[index];
@@ -165,14 +153,8 @@ class ManagerKNN {
     }
 
     calculate(reference: KnnObject, filter: number) {
-        
-        let ref: KnnObject;
-        if (reference instanceof KnnObject) {
-            ref = reference;
-        }
 
-        
-
+        let ref = reference;
 
         let resultData: KnnUser[] = [];
 
@@ -180,6 +162,7 @@ class ManagerKNN {
 
             this.dataObserver.forEach((dato) => {
                 dato.distance = this.evaluateDistCoseno(ref, dato);
+
             });
 
             // Ordenamiento de menor y a mayor
@@ -211,7 +194,7 @@ class ManagerKNN {
         var result: KnnUser[] = [];
         var resultOfKNN: VotoKnn[] = [];
 
-        
+
         let factor = 0;
         while (result.length < secondFilter && factor + 1 < queryRef.dataObserver.length) {
 
@@ -220,18 +203,16 @@ class ManagerKNN {
             let userRefs = this.calculate(ref, firtsFilter);
             let secondUserRefs: KnnUser[][] = [];
 
-            
+
             secondUserRefs.push(queryRef.calculate(ref, factor));
 
             for (let i = 0; i < userRefs.length; i++) {
                 let userRef = userRefs[i];
                 let refUserV = this.getRef(userRef);
-                
+
                 secondUserRefs.push(queryRef.calculate(refUserV, factor));
-            } 
-
-           
-
+            }
+            
             let namesSame: VotoKnn[] = [];
 
             secondUserRefs.forEach((userArray) => {
