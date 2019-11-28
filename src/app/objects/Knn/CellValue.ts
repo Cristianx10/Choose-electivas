@@ -3,7 +3,14 @@ export class CellValue {
     value: string | number;
     constructor(title: string, value: string | number) {
         this.title = title;
-        this.value = value;
+        var conValue;
+        var valNumber = parseInt(value + "");
+        if(isNaN(valNumber) === false){
+            conValue = valNumber;
+        }else{
+            conValue = value;
+        }
+        this.value = conValue;
     }
 }
 

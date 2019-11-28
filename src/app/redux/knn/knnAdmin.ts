@@ -20,10 +20,6 @@ var KnnDefaultState = {
 const reducer = (_this = KnnDefaultState, { type, payload }: IStoreReducer) => {
 
 
-    const setKNNObserver = (knnObserver: ManagerKNN) => {
-        _this.knnObserver = knnObserver;
-    }
-
     switch (type) {
 
         case knnAction:
@@ -34,8 +30,6 @@ const reducer = (_this = KnnDefaultState, { type, payload }: IStoreReducer) => {
         default:
             break;
     }
-
-    KnnDefaultState = _this;
 
     return { ..._this };
 }

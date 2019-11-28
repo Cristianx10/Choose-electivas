@@ -1,16 +1,16 @@
 import React from "react";
-
-import Header from "./componentes/Header/Header";
 import { connect } from "react-redux";
 
-import Login from "./containers/Login/Login";
+import Header from "../Header/Header";
+import Login from "../../containers/Login/Login";
+import Desktop from '../Desktop/Desktop';
+import BarOption from "../BarOption/BarOption";
 
-import { IStore } from './redux/store';
-import { INavegation } from './redux/navegation/navegation';
-import Desktop from './componentes/Desktop/Desktop';
+import { IStore } from '../../redux/store';
+import { INavegation } from '../../redux/navegation/navegation';
 
-import "./style/style.scss";
-import "./style/animations.scss";
+import "./App.scss";
+
 
 interface IPropsApp { navegation: INavegation }
 
@@ -37,13 +37,23 @@ const App = (props: IPropsApp) => {
 
   return (
 
-    <>
-      <Header />
-      <section className="body">
-        {rederPage(navegation.url)}
-      </section>
+    <section className="App">
 
-    </>
+      <article className="App__header">
+        <Header />
+      </article>
+      <article className="App__body">
+
+        <section className="App__body__bar">
+          <BarOption />
+        </section>
+
+        <section className="App__body__page">
+          {rederPage(navegation.url)}
+        </section>
+      </article>
+
+    </section>
   );
 }
 

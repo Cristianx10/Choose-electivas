@@ -32,7 +32,6 @@ class ManagerKNN {
                     let cell = new CellValue(this.titulares[i], datoCell);
                     if (i === 0) {
                         name = cell.value + "";
-                        console.log()
                     }
                     cellInformation.push(cell);
                 });
@@ -132,19 +131,30 @@ class ManagerKNN {
             let queryDate = queryDates[index];
             let queryRef = queryRefs[index];
 
-            if (isNaN(queryDate.value as number) == false && queryRef.value <= MAX_VALUE) {
-                let valDate = queryDates[index].value as number;
-                let valRef = queryRefs[index].value as number;
-                distance += valDate * valRef;
-                acumulateA += Math.pow(valDate, 2);
-                acumulateB += Math.pow(valRef, 2);
+            if (queryDate && queryRef) {
+
+                if (isNaN(queryDate.value as number) == false && queryRef.value <= MAX_VALUE) {
+                    let valDate = queryDates[index].value as number;
+                    let valRef = queryRefs[index].value as number;
+                    distance += valDate * valRef;
+                    acumulateA += Math.pow(valDate, 2);
+                    acumulateB += Math.pow(valRef, 2);
+                }
             }
         }
 
         let productoA = Math.sqrt(acumulateA);
         let productoB = Math.sqrt(acumulateB);
 
-        distCoseno = distance / (productoA * productoB);
+        var denominador = (productoA * productoB);
+
+        if (denominador != 0) {
+            distCoseno = distance / denominador;
+        } else {
+            distCoseno = 0;
+        }
+
+
 
         return distCoseno;
     }

@@ -1,7 +1,7 @@
 import ManagerKNN from '../../../objects/Knn/ManagerKNN';
-export const type = "setKnnObserver";
+export const type = "setListNamesKnn";
 
-const setKnnObserver = (value: ManagerKNN) => {
+const setListNamesKnn = (value: ManagerKNN) => {
 
     return {
         type,
@@ -9,4 +9,4 @@ const setKnnObserver = (value: ManagerKNN) => {
     }
 }
 
-export default setKnnObserver;
+export default setListNamesKnn;

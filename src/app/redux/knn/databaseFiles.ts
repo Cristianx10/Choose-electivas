@@ -18,6 +18,6 @@ export var knnNameElectivas = new ManagerKNN([loadFileNameVsInfoElectivas.databa
 export var knnNameLugares = new ManagerKNN([loadFileNameVsInfoLugares.databaseA, loadFileNameVsInfoLugares.databaseB]);
 
 export var knnElectivas = new ManagerKNN([loadFileElectivasVsInfo.databaseA, loadFileElectivasVsInfo.databaseB]);
-export var knnLugares = new ManagerKNN([loadFileElectivasVsLugares.databaseA, loadFileElectivasVsLugares.databaseB]);
+export var knnLugares = new ManagerKNN([loadFileLugaresVsInfo.databaseA, loadFileLugaresVsInfo.databaseB]);
 
-export var knnElectivasVsLuages = new ManagerKNN([loadFileLugaresVsInfo.databaseA, loadFileLugaresVsInfo.databaseB]);
+export var knnElectivasVsLugares = new ManagerKNN([loadFileElectivasVsLugares.databaseA, loadFileElectivasVsLugares.databaseB]);

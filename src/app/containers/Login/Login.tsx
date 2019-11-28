@@ -7,7 +7,7 @@ import { IStore } from '../../redux/store';
 import { IUser } from '../../redux/user/user';
 
 import "./Login.scss";
-import { PAGE } from '../../App';
+import { PAGE } from '../../componentes/App/App';
 
 interface IPropsLogin { users: IUser, setUrlPage?: Function, setUserPrincipal?: Function }
 

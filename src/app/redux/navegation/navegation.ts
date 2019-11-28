@@ -1,6 +1,6 @@
 import { IStoreReducer } from '../store';
 import { type as serUrlPage } from './actions/serUrlPage';
-import { PAGE } from '../../App';
+import { PAGE } from '../../componentes/App/App';
 
 var defaultState = {
     url: PAGE.DESKTOP,
